@@ -1,0 +1,15 @@
+/* SYSTEM. DO NOT TOUCH */
+#infinity-next-page.hidden {
+    display: none;
+}
+
+#infinite-pagination-render-block {
+    display: none;
+}
+
+
+/* YOU CAN CUSTOMIZE STYLES BELOW THIS LINE */
+
+#infinity-next-page.orange-button {
+    margin: 60px auto 0;
+}
