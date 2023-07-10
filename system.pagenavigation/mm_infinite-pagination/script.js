@@ -6,8 +6,13 @@ class InifinitePagination {
     constructor(
         elementsList,
         itemCSSSelector,
-        appendHiddenRender = document.getElementById("infinite-pagination-render-block")
+        callback = null,
+        appendHiddenRender = document.getElementById("infinite-pagination-render-block") || null,
     ) {
+        console.log(elementsList);
+
+        if (!elementsList) return;
+
         if (typeof elementsList === "string") {
             this.list = document.querySelector(elementsList)
         }
@@ -19,17 +24,21 @@ class InifinitePagination {
             throw error;
         }
 
+        this.callback = callback;
+
         this.itemsSelector = itemCSSSelector;
 
-        if (typeof appendHiddenRender === "string") {
-            this.hiddenRenderBlock = document.querySelector(appendHiddenRender);
-        }
-        else if (typeof appendHiddenRender === "object" && appendHiddenRender.classList) {
-            this.hiddenRenderBlock = appendHiddenRender;
-        }
-        else {
-            const error = "Неверный тип аргумента";
-            throw error;
+        if (appendHiddenRender) {
+            if (typeof appendHiddenRender === "string") {
+                this.hiddenRenderBlock = document.querySelector(appendHiddenRender);
+            }
+            else if (typeof appendHiddenRender === "object" && appendHiddenRender.classList) {
+                this.hiddenRenderBlock = appendHiddenRender;
+            }
+            else {
+                const error = "Неверный тип аргумента";
+                throw error;
+            }
         }
 
         this.isLoading = false;
@@ -65,7 +74,9 @@ class InifinitePagination {
     }
 
     init () {
-        this.initialInfinitePaginationButton.addEventListener("click", this.onButtonClick);
+        if (this.initialInfinitePaginationButton) {
+            this.initialInfinitePaginationButton.addEventListener("click", this.onButtonClick);
+        }
     }
 
     onButtonClick(event) {
@@ -104,6 +115,8 @@ class InifinitePagination {
                 nedeedElements.forEach(elem => {
                     this.list.appendChild(elem)
                 })
+
+                this.callback();
 
                 this.hiddenRenderBlock.innerHTML = "";
             })
