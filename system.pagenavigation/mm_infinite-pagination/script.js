@@ -9,8 +9,6 @@ class InifinitePagination {
         callback = null,
         appendHiddenRender = document.getElementById("infinite-pagination-render-block") || null,
     ) {
-        console.log(elementsList);
-
         if (!elementsList) return;
 
         if (typeof elementsList === "string") {
