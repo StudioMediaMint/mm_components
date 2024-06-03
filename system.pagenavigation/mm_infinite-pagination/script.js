@@ -114,7 +114,10 @@ class InifinitePagination {
                     this.list.appendChild(elem)
                 })
 
-                this.callback();
+                if (this.callback !== null && typeof(this.callback) === "function") {
+                    this.callback();
+                }
+
 
                 this.hiddenRenderBlock.innerHTML = "";
             })
