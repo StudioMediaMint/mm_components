@@ -9,7 +9,14 @@
 
 
 /* YOU CAN CUSTOMIZE STYLES BELOW THIS LINE */
-
-#infinity-next-page.orange-button {
-    margin: 60px auto 0;
+#infinity-next-page.button {
+    margin: 45px auto 0;
+}
+@media screen and (max-width: 576px) {
+    #infinity-next-page.button {
+        margin: 80px auto 0;
+    }
+}
+#infinity-next-page.disabled {
+    pointer-events: none;
 }

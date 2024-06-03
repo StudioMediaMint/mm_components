@@ -81,12 +81,14 @@ class InifinitePagination {
         // this = object context because of bind in constructor
 
         event.preventDefault();
+        const btn = event.currentTarget;
 
         const url = event.currentTarget.getAttribute("href");
 
         this.isLoading = false;
 
         if (this.isLoading) return;
+        this.initialInfinitePaginationButton.classList.add("disabled");
 
         const response = fetch(`${url}&is_ajax=y`);
 
@@ -123,6 +125,7 @@ class InifinitePagination {
             })
             .finally(data => {
                 this.isLoading = false;
+                this.initialInfinitePaginationButton.classList.remove("disabled");
             });
     }
 }
